@@ -1,5 +1,5 @@
 
-# BitzArt.Blazor.Auth.SampleApp updated v100
+# BitzArt.Blazor.Auth.SampleApp updated
 
 
 Library repo:

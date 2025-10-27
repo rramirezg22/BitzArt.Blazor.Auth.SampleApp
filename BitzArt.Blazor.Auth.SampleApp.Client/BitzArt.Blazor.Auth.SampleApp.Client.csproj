@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+		<StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+		<RootNamespace>BitzArt.Blazor.Auth.SampleApp</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BitzArt.Blazor.Auth.SampleApp.Shared\BitzArt.Blazor.Auth.SampleApp.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="BitzArt.Blazor.Auth">
+	    <HintPath>..\BitzArt.Blazor.Auth\BitzArt.Blazor.Auth.dll</HintPath>
+	  </Reference>
+	  <Reference Include="BitzArt.Blazor.Auth.Client">
+	    <HintPath>..\BitzArt.Blazor.Auth\BitzArt.Blazor.Auth.Client.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+</Project>

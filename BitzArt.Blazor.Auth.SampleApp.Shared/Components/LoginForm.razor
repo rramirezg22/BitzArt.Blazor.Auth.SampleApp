@@ -1,0 +1,79 @@
+﻿@namespace BitzArt.Blazor.Auth.SampleApp
+
+      <EditForm class="form-signin mb-4" Model="@_credential" OnSubmit="SignInAsync">
+        <div class="form-group">
+          <label for="user-name">User name</label>
+          <InputText class="form-control" id="user-name" aria-describedby="emailHelp" placeholder="Indirizzo e-mail" @bind-Value=@_credential.UserName />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <InputText type="password" class="form-control" id="password" placeholder="Password" @bind-Value=@_credential.Password />
+        </div>
+        <div class="form-group">
+          <button type="submit" id="login" name="login" class="btn btn-primary">Login</button>
+        </div>
+      </EditForm>
+
+<AuthorizeView>
+
+  <NotAuthorized>
+    <div>
+      <h4>
+          You are not authenticated.
+      </h4>
+
+
+
+      <div style="margin-top:2rem;">
+          <button type="submit" class="btn btn-lg btn-primary" @onclick="SignInAsync">Sign In</button>
+      </div>
+    </div>
+  </NotAuthorized>
+
+  <Authorized>
+    <div>
+      <h4>
+        You are already authenticated.
+      </h4>
+      <div style="margin-top:2rem;">
+        <button type="submit" class="btn btn-lg btn-primary" @onclick="SignOutAsync">Sign Out</button>
+      </div>
+    </div>
+  </Authorized>
+</AuthorizeView>
+
+@code
+{
+  public class Credential { public string UserName { get; set; } = ""; public string Password { get; set; } = ""; }
+  private Credential _credential = new Credential();
+
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
+    [Inject] IUserService<SignInPayload> UserService { get; set; } = null!;
+
+    private bool IsInteractive => RendererInfo.IsInteractive;
+
+    private async Task SignInAsync()
+    {
+        // Simulating user input
+        //var signInPayload = new SignInPayload("some data");
+        var signInPayload = new SignInPayload(_credential.UserName);
+    
+
+        // Signing the user in
+        var authenticationResult = await UserService.SignInAsync(signInPayload);
+
+        // Refresh the page after signing in
+        // to let Blazor know that the user's authentication state has changed
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
+    private async Task SignOutAsync()
+    {
+        // Signing the user out
+        await UserService.SignOutAsync();
+
+        // Refresh the page after signing out
+        // to let Blazor know that the user's authentication state has changed
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+}

@@ -7,3 +7,20 @@
 <PageTitle>Auth Required Page | Blazor.Auth</PageTitle>
 
 You are authorized to see this page!
+v115
+@temp1();
+
+@code
+{
+
+	[Inject] IUserService<SignInPayload> UserService { get; set; } = null!;
+
+	private string temp1()
+	{
+		//var www = UserService.GetAuthenticationStateAsync();
+		//var signInPayload = new SignInPayload("some data");
+		//var xxx = UserService.SignInAsync(signInPayload);
+		var xxx1 = UserService.ToString();
+		return xxx1;
+	}
+}

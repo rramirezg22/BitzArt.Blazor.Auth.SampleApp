@@ -28,14 +28,27 @@ public class JwtService
     {
         var now = DateTime.UtcNow;
 
-        var accessTokenDuration = new TimeSpan(hours: 0, minutes: 15, seconds: 0);
+		var XXXclaims = new List<Claim>
+						{
+								new Claim(ClaimTypes.Name, "the_name"),
+								new Claim(ClaimTypes.Email, "the_email"),
+								new Claim(ClaimTypes.Role, "the_role")
+						};
+
+		//var identity = new ClaimsIdentity(claims, "jwt");
+		//var principal = new ClaimsPrincipal(identity);
+
+		var accessTokenDuration = new TimeSpan(hours: 0, minutes: 15, seconds: 0);
         var accessTokenExpiresAt = now + accessTokenDuration;
         var accessToken = _tokenHandler.WriteToken(new JwtSecurityToken(
-            claims:
+				claims: XXXclaims,
+ /*
+        claims:
             [
                 new Claim("myClaim", "My claim data")
             ],
-            notBefore: now,
+  */
+						notBefore: now,
             expires: accessTokenExpiresAt,
             signingCredentials: _signingCredentials
         ));
